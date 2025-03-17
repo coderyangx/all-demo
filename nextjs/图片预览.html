@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="file" id="ipt" />
+  <hr>
+  <img src='' width=300 id='preview' alt="" />
+  <img src='' width=300 id='preview1' alt="" />
+
+</body>
+<script>
+  const inputElement = document.querySelector('#ipt');
+  let objectURL = ''
+  const handleChange = (e) => {
+    console.log(e, e.target.files[0]);
+    const file = e.target.files[0];
+    objectURL = URL.createObjectURL(file);
+    console.log('URL.createObjectURL', objectURL);
+  };
+  inputElement.addEventListener('change', handleChange);
+
+  // FileReader
+  inputElement.onchange = (e) => {
+    const reader = new FileReader()
+    reader.readAsDataURL(e.target.files[0])
+    reader.onload = (readRes) => {
+      console.log('FileReader', readRes.target.result);
+      document.querySelector('#preview1').src = readRes.target.result
+    }
+  }
+
+  // 在组件卸载时释放资源
+  window.onunload = () => {
+    if (objectURL) {
+      URL.revokeObjectURL(objectURL);
+    }
+    inputElement.removeEventListener('change', handleChange);
+  }
+
+  const txt = '握手呜呜呜呜呜呜呜'
+  const blob = new Blob([txt], { type: 'text/plain;charset=utf-8' })
+  const txturl = URL.createObjectURL(blob)
+  console.log(txturl);
+  const a = document.createElement('a')
+  a.href = txturl
+  a.download = '下载'
+  // a.click()
+  URL.revokeObjectURL(txturl);
+
+
+</script>
+
+</html>

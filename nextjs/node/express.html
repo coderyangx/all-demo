@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  .wrapper {
+    width: 300px;
+    /* height: 200px; */
+    line-height: 10px;
+    overflow: visible;
+    border: 1px solid #999;
+    /* background: linear-gradient(to right bottom, rgb(234, 170, 205), rgb(255, 255, 255)); */
+  }
+
+  .content {
+    display: inline-block;
+    font-size: 18px;
+    border: 1px solid red;
+  }
+
+  /* tooltip */
+  .tooltip {
+    position: relative;
+    float: right;
+    display: inline-block;
+    margin-top: 100px;
+    border-bottom: 1px dotted black;
+  }
+
+  /* 跟随元素形状的阴影 */
+  /* filter: drop-shadow(0 0 10px #666); */
+  .tooltip .tooltiptext {
+    /* visibility: hidden; */
+    width: 200px;
+    height: 80px;
+    background-color: #efcaca;
+    /* border: 2px solid; */
+    text-align: center;
+    border-radius: 50%;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: -250%;
+    /* margin-left: -60px; */
+    opacity: 0;
+    transition: opacity 0.3s;
+    /* 跟随元素形状的阴影 */
+    filter: drop-shadow(0 0 10px #666);
+    /* box-shadow: 0 0 10px #666; */
+  }
+
+  .tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -10px;
+    border-width: 20px;
+    border-style: solid;
+    border-color: #efcaca transparent transparent transparent;
+  }
+
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+</style>
+
+<body>
+
+  <div class="wrapper">
+    <div class="content">
+      我是子盒子我是子盒子我是子盒子我是子盒子我是子盒子我是子盒子我是子盒子
+    </div>
+  </div>
+
+  <div class="tooltip">鼠标移动到这里
+    <span class="tooltiptext">我是提示信息</span>
+  </div>
+
+</body>
+
+
+<script>
+  fetch('http://localhost:3000/get')
+    .then((res) => res.json())
+    .then((data) => console.log(data));
+
+  fetch('http://localhost:3000/post', {
+    method: 'POST',
+    body: JSON.stringify({
+      name: 'zhangsan',
+      age: 18
+    })
+  }).then((res) => {
+    console.log('res.headers', res.headers.get('yangxu'));
+    return res.text()
+  })
+    .then((data) => {
+      // document.body.innerHTML = data
+      document.write(data)
+    });
+
+</script>
+
+</html>

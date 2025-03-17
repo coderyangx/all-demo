@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <style>
+    div {
+      font-size: 100px;
+      -webkit-text-stroke: #ccc 2px;
+      color: transparent;
+    }
+
+    div::after {
+      content: ' ' attr(data-content);
+      color: aqua;
+      font-style: 16px;
+    }
+  </style>
+  <div data-content="h5自定义属性" data-it-c="data-it属性"></div>
+
+
+  <main  style="height: 1000px">
+    <section id="main" style="height: 500px;position:relative;background-color: aquamarine;">
+      父元素
+      <p style="position: absolute;bottom: 0;background-color: pink;">powered</p>
+    </section>
+    <h2 draggable="true" style="background-color: blueviolet;">可拖拽</section></section>
+  </main>
+
+
+</body>
+<script>
+  // 获取div标签并获取所有属性
+  const div = document.querySelector('div')
+  div.textContent = div.dataset.content
+  console.log(div.dataset);
+
+  // 拖拽实现
+  const dragElement = document.querySelector('[draggable="true"]');
+  dragElement.addEventListener('dragstart', (event) => {
+    event.dataTransfer.setData('text/plain', event.target.id);
+    console.log('被拖拽元素：', event);
+  });
+  const dropZone = document.querySelector('#main')
+  dropZone.addEventListener('dragover', (e) => {
+    e.preventDefault()
+    console.log('放置区域: ', e);
+  })
+  dropZone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    console.log('drop');
+    const draggedElementId = e.dataTransfer.getData('text/plain');
+    console.log(draggedElementId);
+    const draggedElement = document.getElementById(draggedElementId);
+    dropZone.appendChild(draggedElement);
+  });
+
+</script>
+
+</html>

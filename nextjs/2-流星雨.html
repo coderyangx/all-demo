@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>流星雨</title>
+</head>
+
+<body>
+  <canvas id="canvas"></canvas>
+
+
+</body>
+<script lang="typescript">
+  document.body.style.background = 'black'
+
+  let canvas = document.querySelector('#canvas');
+  console.log(canvas);
+  let ctx = canvas.getContext('2d');
+  canvas.width = document.documentElement.clientWidth || window.innerWidth;
+  canvas.height = document.documentElement.clientHeight || window.innerHeight;
+  let meteors = [];
+  let allStars = 40; //星星数量
+
+  function init() {
+    for (let i = 0; i < allStars; i++) {
+      newMeteor()
+    }
+  }
+
+  function newMeteor() {
+    meteors.push({
+      lines: [{
+        x: parseInt(Math.random() * canvas.width),
+        y: parseInt(Math.random() * canvas.height * 0.7),
+      }],
+      life: parseInt(Math.random() * 100) + 100,
+      age: 0
+    })
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let i = 0; i < meteors.length; i++) {
+      meteor = meteors[i]
+      lines = meteor.lines
+      // 循环流星的每一段
+      for (let j = 0; j < lines.length; j++) {
+        ctx.fillStyle = `rgba(255,255,255,${j / lines.length})`
+        ctx.fillRect(lines[j].x, lines[j].y, 2, 2)
+      }
+      ctx.fillStyle = 'black'  // `rgbs(255,255,255,${meteor.age / meteor.life})})`
+      let s_head = lines[lines.length - 1]
+      ctx.fillRect(s_head.x, s_head.y, 3, 3)
+      if (meteor.age < meteor.life / 2) {
+        lines.push({
+          // 下一个点的位置
+          x: s_head.x + 1,
+          y: s_head.y + 0.4
+        })
+      } else {
+        lines.shift()
+      }
+      meteor.age++
+      if (meteor.age > meteor.life) {
+        meteors.splice(i, 1)
+        newMeteor()
+      }
+    }
+  }
+
+  init()
+  setInterval(draw, 4)
+
+
+
+</script>
+
+</html>

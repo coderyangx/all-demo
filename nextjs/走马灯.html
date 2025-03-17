@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <style>
+    @keyframes marqueeAnim {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    .marquee-wrapper {
+      display: flex;
+      /* width: 600px; */
+      animation: marqueeAnim 10s linear infinite;
+      overflow: hidden;
+    }
+
+    .marquee-content {
+      display: flex;
+      flex-wrap: nowrap;
+      width: 600px;
+
+      overflow: hidden;
+    }
+
+    .marquee-wrapper:hover {
+      animation-play-state: paused;
+    }
+  </style>
+  <div class="marquee-wrapper">
+    <div class="marquee-content">
+      <div style="width: 200px; height: 200px;background-color: aqua;"></div>
+      <div style="width: 200px; height: 200px;background-color: rgb(169, 206, 206);"></div>
+      <div style="width: 200px; height: 200px;background-color: rgb(60, 66, 66);"></div>
+    </div>
+    <div class="marquee-content">
+      <!-- 你的内容 -->
+      <div style="width: 200px; height: 200px;background-color: rgb(190, 202, 144);"></div>
+      <div style="width: 200px; height: 200px;background-color: rgb(139, 82, 118);"></div>
+      <div style="width: 200px; height: 200px;background-color: rgb(119, 99, 186);"></div>
+    </div>
+  </div>
+
+
+</body>
+
+</html>

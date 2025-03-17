@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="wrap"></div>
+
+  <script>
+    /*
+      * 虚拟渲染10000条数据
+      */
+    const wrapEle = document.querySelector('#wrap')
+    const loop = (length = 10) => {
+      for (let i = 0; i < length; i++) {
+        const div = document.createElement('div')
+        div.textContent = `${Math.random() * 10000} -- ${i}`
+        wrapEle.append(div)
+      }
+    }
+    loop(5000 * 10)
+
+    /**
+     * 控制请求的并发数
+     */
+    async function asyncPool(poolLimit, array, iteratorFn) {
+      const result = [];
+      const executing = [];
+
+      for (const item of array) {
+        const p = Promise.resolve().then(() => iteratorFn(item, array));
+        result.push(p);
+
+        if (poolLimit <= array.length) {
+          const e = p.then(() => executing.splice(executing.indexOf(e), 1));
+          executing.push(e);
+          if (executing.length >= poolLimit) {
+            await Promise.race(executing);
+          }
+        }
+      }
+
+      return Promise.all(result);
+    }
+
+    // 示例
+    async function uploadFile(file) {
+      // 文件上传逻辑
+    }
+
+    async function limitedFileUpload(files) {
+      return asyncPool(3, files, uploadFile);
+    }
+
+  </script>
+
+</body>
+
+</html>

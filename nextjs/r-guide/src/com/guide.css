@@ -1,0 +1,82 @@
+.guide {
+  /* position: relative;
+  top: 0;
+  left: 0; */
+  width: 80vw;
+  height: 1200px;
+  /* z-index: 9999; */
+  padding: 100px;
+}
+.target {
+  width: 200px;
+  height: 100px;
+  background-color: rgb(153, 213, 237);
+  /* transition: all .5s ease-out; */
+}
+.mask {
+  position: relative;
+  box-shadow: 0 0 0 5000px rgba(0,0,0,.5);
+  border-radius: 5px;
+  z-index: 9999;
+}
+.popover {
+  display: none;
+  width: 200px;
+  height: 100px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  /* transition: all .5s ease-in-out; */
+}
+
+.popover-arrow {
+  position: absolute;
+  top: 50%;
+  left: -9%;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px;
+  border-color: transparent  #ccc  transparent transparent;
+}
+/* 
+.mask {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.content {
+  position: absolute;
+  z-index: 1000;
+}
+
+.popover {
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  z-index: 1001;
+}
+
+.popover-content {
+  margin-bottom: 10px;
+}
+
+.popover-arrow {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -10px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px;
+  border-color: transparent transparent #ccc transparent;
+} */

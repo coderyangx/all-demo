@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <style>
+    /* 单独元素实现 */
+    /* .self-mask {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .6);
+    } */
+
+    .target {
+      width: 200px;
+      height:100px;
+      margin:150px;
+      background: #f8e24f;
+    }
+    /* 另外这里没有使用固定定位，而是使用绝对定位，其实是因为如果使用固定定位，
+      页面可以滚动，但是高亮框并不会滚动，那么就对不上了。 */
+    .popover {
+      position: absolute;
+      background-color: #fff;
+      /* border: 1px solid #ccc; */
+      border-radius: 5px;
+      padding: 10px;
+      display: none;
+    }
+    .popover::after {
+      content: "";
+      position: absolute;
+      bottom: calc(100% - 1px);
+      left: 50%;
+      margin-left: -5px;
+      border-width: 8px;
+      border-style: solid;
+      border-color: transparent transparent #fff transparent;
+    }
+  </style>
+
+  <div class="target">高亮内容区</div>
+  <div class="popover">引导内容区</div>
+
+  <!-- <div class="self-mask"></div> -->
+  <!-- <div class="border-mask"></div> -->
+
+  <div id="id1">11</div>
+  <div id="id2">22</div>
+
+
+</body>
+<script>
+  const target = document.querySelector('.target')
+  // box-shadow实现mask
+  target.style.boxShadow = '0 0 0 5000px rgba(0,0,0,.5)'
+  target.style.borderRadius = '5px'
+  target.style.zIndex = '9999'
+  // target.style.transition = 'all .5s ease-out' // 实现切换时高亮的过渡效果
+
+
+  const popover = document.querySelector('.popover');
+  function showPopover() {
+    const rect = target.getBoundingClientRect();
+    popover.style.top = rect.top + rect.height + 10 + 'px';
+    popover.style.left = rect.left + 'px';
+    popover.style.display = 'block';
+  }
+
+  function hidePopover() {
+    popover.style.display = 'none';
+  }
+
+  // 显示popover
+  showPopover();
+
+  // 隐藏popover（可根据需要调用）
+  // hidePopover();
+
+
+
+
+  // const el = document.querySelector('.border-mask')
+  // const rect = target.getBoundingClientRect()
+  // const clientWidth = document.documentElement.clientWidth || document.body.clientWidth
+  // const clientHeight = document.documentElement.clientHeight || document.body.clientHeight
+
+  // setTimeout(() => {
+  //   el.style.borderTopWidth = rect.top + 'px';
+  //   el.style.borderRightWidth = clientWidth - rect.right + 'px';
+  //   el.style.borderBottomWidth = clientHeight - rect.bottom + 'px';
+  //   el.style.borderLeftWidth = rect.left + 'px';
+  //   el.style.borderColor = 'rgba(0, 0, 0, 0.6)'
+  //   el.style.width = rect.width + 'px',
+  //   el.style.height = rect.height + 'px'
+  //   console.log(rect, el);
+  // }, 1000)
+  
+
+</script>
+
+</html>
