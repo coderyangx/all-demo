@@ -1,0 +1,15 @@
+<!--pages/articles.wxml-->
+<view class="articles-container">
+  <view class="article-list">
+    <block wx:for="{{articles}}" wx:key="id">
+      <view class="article-item" bindtap="onArticleTap" data-id="{{item.id}}">
+        <image class="article-image" src="{{item.cover}}" mode="aspectFill"></image>
+        <view class="article-info">
+          <text class="article-title">{{item.title}}</text>
+          <text class="article-date">{{item.date}}</text>
+          <text class="article-summary">{{item.summary}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>
