@@ -1,0 +1,78 @@
+```json
+{
+    "schema": {
+        "schemaType": "CARD_NORMAL",
+        "schemaVersion": "3.0",
+        "pages": [
+            {
+                "id": "page_1",
+                "layout": {
+                    "id": "universal_card_1",
+                    "componentName": "UniversalCard",
+                    "props": {
+                        "title": "快搭早会",
+                        "theme": "green",
+                        "titleBgStyle": "color"
+                    },
+                    "children": [
+                        {
+                            "id": "text_1",
+                            "componentName": "Text",
+                            "props": {
+                                "content": "你的日程将在2025年03月11日 星期二 10:15 (GMT+08:00)开始，请准时前往",
+                                "type": "plain",
+                                "marginTop": 8,
+                                "marginBottom": 0
+                            },
+                            "children": []
+                        },
+                        {
+                            "id": "icon_1",
+                            "componentName": "Icon",
+                            "props": {
+                                "icon": "avatar-o",
+                                "marginTop": 8,
+                                "marginBottom": 0
+                            },
+                            "children": []
+                        },
+                        {
+                            "id": "text_2",
+                            "componentName": "Text",
+                            "props": {
+                                "content": "频次：每周两次，周一&周三，或周二&周四\n会议内容：发送进展；重要问题沟通同步",
+                                "type": "plain",
+                                "marginTop": 8,
+                                "marginBottom": 0
+                            },
+                            "children": []
+                        },
+                        {
+                            "id": "button_1",
+                            "componentName": "Button",
+                            "props": {
+                                "text": "查看详情",
+                                "styleType": "default",
+                                "marginTop": 12,
+                                "marginBottom": 0,
+                                "onClick": {
+                                    "type": "openUrl",
+                                    "params": {
+                                        "urlType": "unify",
+                                        "url": "https://example.com"
+                                    },
+                                    "module": "platform"
+                                }
+                            },
+                            "children": []
+                        }
+                    ]
+                }
+            }
+        ],
+        "localList": [],
+        "varList": []
+    },
+    "variables": {}
+}
+```
